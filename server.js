@@ -33,10 +33,10 @@ app.get("/",(req, res) => {
 const userRoutes = require("./api/user/route/user"); //import user routes
 app.use("/user", userRoutes);
 
-app.use(express.static(path.join(__dirname, "./dist")));
-app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, './dist', 'index.html'))
-})
+// app.use(express.static(path.join(__dirname, "./dist")));
+// app.get('/*', (req, res) => {
+//     res.sendFile(path.join(__dirname, './dist', 'index.html'))
+// })
 
 app.listen(PORT, () => {
     console.log(`App up and listening on port ${PORT}`)

@@ -2,6 +2,23 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const todoSchema = mongoose.Schema({
+    title: {
+        type: String,
+        
+    },
+    isCompleted: {
+        type: Boolean,
+        
+        default: false
+    },
+    currentlyEditing: {
+        type: Boolean,
+        
+        default: false
+    },
+});
+
 const userSchema = mongoose.Schema({
     name: {
         type: String,
@@ -22,8 +39,12 @@ const userSchema = mongoose.Schema({
                 required: true
             }
         }
+    ],
+    currentTodos: [
+       todoSchema
     ]
 });
+
 
 //hash password before saving
 userSchema.pre("save", async function(next) {

@@ -1,11 +1,13 @@
 const User = require("../model/User");
+const Todo = require("../model/Todos");
+const { ObjectId } = require("bson");
 
 exports.registerNewUser = async (req, res) => {
     try {
       const user = new User({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
       });
       console.log("HERE")
       let data = await user.save();
@@ -15,6 +17,37 @@ exports.registerNewUser = async (req, res) => {
       res.status(400).json({ err: err });
     }
   };
+
+  exports.addThisTodo = async (req, res) => {
+    try {
+      const newTitle = req.params.newtodo
+      const user = await User.findOne({email: req.params.currentuser});
+      const todo = new Todo({
+        title: newTitle,
+        isCompleted: false,
+        currentlyEditing: false,
+      });
+      // console.log(todo)
+      user.currentTodos.push(todo)
+      await user.save()
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+exports.getTodos = async (req, res) => {
+    const user = await User.findOne({email: req.params.currentuser})
+    const todos = user.currentTodos
+    res.status(201).json({ todos });
+}
+
+exports.deleteTodo = async (req, res) => {
+  console.log(req.params)
+  const user = await User.findOne({email: req.params.currentuser})
+  user.currentTodos.pull({_id: req.params.todoid})
+  user.save()
+  res.status(201).json({ user });
+}
 
 exports.loginUser = async (req, res) => {
     try {
