@@ -67,7 +67,7 @@ export default {
     async registerUser() {
       try {
         // let response = await this.$http.post("/user/register", this.register); //development
-        let response = await axios.post("/user/register", this.register);
+        let response = await axios.post("/user/register", this.register); //Production
         console.log(response);
         let token = response.data.token;
         if (token) {

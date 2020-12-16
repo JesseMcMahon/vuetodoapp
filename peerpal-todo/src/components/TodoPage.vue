@@ -138,12 +138,13 @@ export default {
 .remove-item {
     color: red;
     font-size: 18px;
+    transition: .4s;
 }
 .remove-item:hover {
     cursor: pointer;
     color: red;
     transform: scale(1.3);
-    transition: .2s;
+    transition: .4s;
 }
 
 .todo-item-left {
