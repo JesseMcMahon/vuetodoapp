@@ -1,6 +1,7 @@
 const User = require("../model/User");
 const Todo = require("../model/Todos");
 const { ObjectId } = require("bson");
+const { db } = require("../model/User");
 
 exports.registerNewUser = async (req, res) => {
     try {
@@ -30,6 +31,7 @@ exports.registerNewUser = async (req, res) => {
       // console.log(todo)
       user.currentTodos.push(todo)
       await user.save()
+      res.status(201).json({ user });
     } catch (err) {
       console.log(err);
     }
@@ -48,6 +50,30 @@ exports.deleteTodo = async (req, res) => {
   user.save()
   res.status(201).json({ user });
 }
+
+// exports.completeTodo = async (req, res) => {
+//   console.log(req.params)
+//   const ID = req.params.todoid
+//   const user = await User.findOne({email: req.params.currentuser})
+//   console.log(user)
+//   const updated = await User.update(
+//     {email: req.params.currentuser},
+//     {
+//       $set: {
+//         currentTodos: {
+//           isCompleted: true
+//         }
+//       }
+//     }
+//   )
+//   console.log(updated)
+  // user.currentTodos.findOne(
+  //   {_id: ID, isCompleted: false},
+  //   { $set: {"isCompleted.$" : true} }
+  // )
+  // user.save()
+  // console.log(user.currentTodos)
+// }
 
 exports.loginUser = async (req, res) => {
     try {
