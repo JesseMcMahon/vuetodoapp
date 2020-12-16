@@ -21,7 +21,7 @@
             v-model="register.email"
             required
           />
-          <!-- Password -->
+         
           <input
             type="password"
             id="password"
@@ -44,8 +44,8 @@
           <h1>Welcome to ToDo+</h1>
           <h2><span class="colored-text">Why ToDo+? Because you're busy.</span><br/>
           ToDo+ is an intuitive app that will allow you
-            to organize your tasks in away that leaves you stress free and 
-            prepared to attack whatever obstacles may be in your way
+            to organize your tasks in a way that leaves you stress free and 
+            prepared to attack whatever obstacles may be in your way!
           </h2>
         </div>
   </div>
@@ -66,8 +66,8 @@ export default {
   methods: {
     async registerUser() {
       try {
-        let response = await this.$http.post("/user/register", this.register); //development
-        // let response = await axios.post("/user/register", this.register); production
+        // let response = await this.$http.post("/user/register", this.register); //development
+        let response = await axios.post("/user/register", this.register); production
         console.log(response);
         let token = response.data.token;
         if (token) {
@@ -117,7 +117,7 @@ export default {
   color: #b993d6;
   font-family: 'Ubuntu', sans-serif;
   font-weight: bold;
-  font-size: 23px;
+  font-size: 36px;
 }
 
 .input {
@@ -148,6 +148,12 @@ export default {
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
     margin-top: 25px;
+    transition: .4s;
+}
+
+.sign-up-btn:hover {
+  transform: scale(1.2);
+  transition: .5s;
 }
 
 .go-to-login {
@@ -176,9 +182,33 @@ export default {
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);    
 }
 
+@media only screen and (max-width: 1500px) {
+  .form-container {
+      margin-top: 0px;
+      padding: 50px;
+}
+}
+
 @media only screen and (max-width: 1250px) {
-   .welcome-message {
+.welcome-message {
       display: none;
 }
+.form-container {
+  display: block;
+}
+.form {
+  width: 600px;
+  margin: 0 auto;
+}
+
+}   
+
+@media only screen and (max-width: 720px) {
+
+.form {
+  width: 400px;
+  margin: 0 auto;
+}
+
 } 
 </style>

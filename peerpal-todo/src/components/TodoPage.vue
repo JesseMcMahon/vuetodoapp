@@ -6,12 +6,12 @@
         <input type="text" class="todo-input" placeholder="Enter new todo here" @keyup.enter="addTodo" v-model="newTodo" />
         <div v-for="todo in todoData" :key="todo._id" :todo="todo" class="todo-item">
             <div class="todo-item-left">
-                <input type="checkbox" @click="completeTodo(todo)" v-model="todo.isCompleted" />
+                <!-- <input type="checkbox" @click="completeTodo(todo)" v-model="todo.isCompleted" /> -->
                 <div v-if="!todo.currentlyEditing" @dblclick="editTodo(todo)" class="todo-item-label" :class="{completed : todo.isCompleted}">{{todo.title}}</div>
                 <input v-else class="todo-item-edit" type="text" v-model="todo.title" @blur="doneEditing(todo)" @keyup.enter="doneEditing(todo)" v-focus />
             </div>
             <div class="remove-item" @click="removeTodo(todo._id)">
-                &times;
+                <!-- &times; --> Complete
             </div>  
         </div>
 
@@ -34,8 +34,8 @@ export default {
             let decoded = VueJwtDecode.decode(token);
             this.user = decoded;
             console.log(this.user)
-            let todoData = await this.$http.get(`/user/gettodos/${this.user.email}`) //Development
-            // let todoData = await axios.get(`/user/gettodos/${this.user.email}`) //Production
+            // let todoData = await this.$http.get(`/user/gettodos/${this.user.email}`) //Development
+            let todoData = await axios.get(`/user/gettodos/${this.user.email}`) //Production
             this.todoData = todoData.data.todos
             console.log(this.todoData)
     },
@@ -67,13 +67,13 @@ export default {
             console.log(this.user)
             console.log("Hello world");
             this.newTodo = ''
-            let response = await this.$http.post(`/user/addtodo/${this.user.email}/${newestTodo}`); //Development
-            // let response = await axios.post(`/user/addtodo/${this.user.email}/${newestTodo}`); //Production
+            // let response = await this.$http.post(`/user/addtodo/${this.user.email}/${newestTodo}`); //Development
+            let response = await axios.post(`/user/addtodo/${this.user.email}/${newestTodo}`); //Production
             this.todoData = response.data.user.currentTodos
         },
         async removeTodo(id) {
-               let response = await this.$http.put(`/user/removetodo/${this.user.email}/${id}`) //Development
-            // let response = await axios.put(`/user/removetodo/${this.user.email}/${id}`) //Production
+            //    let response = await this.$http.put(`/user/removetodo/${this.user.email}/${id}`) //Development
+            let response = await axios.put(`/user/removetodo/${this.user.email}/${id}`) //Production
             this.todoData = response.data.user.currentTodos
         },
          editTodo(todo) {
@@ -98,8 +98,8 @@ export default {
             let decoded = VueJwtDecode.decode(token);
             this.user = decoded;
             console.log(this.user)
-            let todoData = await this.$http.get(`/user/gettodos/${this.user.email}`) //Development
-            // let todoData = await axios.get(`/user/gettodos/${this.user.email}`) //Production
+            // let todoData = await this.$http.get(`/user/gettodos/${this.user.email}`) //Development
+            let todoData = await axios.get(`/user/gettodos/${this.user.email}`) //Production
             this.todoData = todoData.data.todos
             console.log(this.todoData)
         },
@@ -136,7 +136,8 @@ export default {
 }
 
 .remove-item {
-    color: black
+    color: red;
+    font-size: 18px;
 }
 .remove-item:hover {
     cursor: pointer;
@@ -190,8 +191,10 @@ export default {
 }
 
 .congrats {
+    margin: 0 auto;
+    font-size: 36px;
     color: green;
-    transition: .3s;
+    transition: .7s;
 }
 
 @media only screen and (max-width: 700px) {

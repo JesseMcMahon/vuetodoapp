@@ -8,8 +8,8 @@ const base = axios.create({
   baseURL: "http://localhost:4000"
 })
 
-Vue.prototype.$http = base
-Vue.config.productionTip = false
+// Vue.prototype.$http = base
+// Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
