@@ -26,9 +26,9 @@ app.use(morgan("dev"));
 
 //ROUTES
 
-app.get("/",(req, res) => {
-    console.log("We're getting there")
-});
+// app.get("/",(req, res) => {
+//     console.log("We're getting there")
+// });
 
 const userRoutes = require("./api/user/route/user"); //import user routes
 app.use("/user", userRoutes);
