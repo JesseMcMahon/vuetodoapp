@@ -194,5 +194,22 @@ export default {
   margin: 0 auto;
 }
 
+.input {
+  width: 100%;
+}
+
+.go-to-register {
+  font-size: 16px;
+  padding-top: 0px;
+}
+
+} 
+
+@media only screen and (max-width: 500px) {
+.form {
+  width: 100%;
+  padding: 0px 25px;
+}
+
 } 
 </style>
