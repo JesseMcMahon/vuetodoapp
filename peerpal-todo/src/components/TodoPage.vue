@@ -33,11 +33,9 @@ export default {
             let token = localStorage.getItem("jwt");
             let decoded = VueJwtDecode.decode(token);
             this.user = decoded;
-            console.log(this.user)
             // let todoData = await this.$http.get(`/user/gettodos/${this.user.email}`) //Development
             let todoData = await axios.get(`/user/gettodos/${this.user.email}`) //Production
             this.todoData = todoData.data.todos
-            console.log(this.todoData)
     },
     name: "TodoPage",
     data () {
@@ -63,9 +61,6 @@ export default {
             let decoded = VueJwtDecode.decode(token);
             this.user = decoded;
             const newestTodo = this.newTodo;
-            console.log(newestTodo)
-            console.log(this.user)
-            console.log("Hello world");
             this.newTodo = ''
             // let response = await this.$http.post(`/user/addtodo/${this.user.email}/${newestTodo}`); //Development
             let response = await axios.post(`/user/addtodo/${this.user.email}/${newestTodo}`); //Production
@@ -80,11 +75,6 @@ export default {
            todo.currentlyEditing = true
 
         },
-        completeTodo(todo) {
-            // console.log(id)
-            // let response = await this.$http.put(`/user/completetodo/${this.user.email}/${id}`)
-            // todo.isCompleted = true    
-        },
         doneEditing(todo) {
             todo.currentlyEditing = false
         },
@@ -97,11 +87,9 @@ export default {
             let token = localStorage.getItem("jwt");
             let decoded = VueJwtDecode.decode(token);
             this.user = decoded;
-            console.log(this.user)
             // let todoData = await this.$http.get(`/user/gettodos/${this.user.email}`) //Development
             let todoData = await axios.get(`/user/gettodos/${this.user.email}`) //Production
             this.todoData = todoData.data.todos
-            console.log(this.todoData)
         },
     },
     directives: {

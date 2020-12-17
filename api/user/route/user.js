@@ -9,6 +9,5 @@ router.post("/addtodo/:currentuser/:newtodo", userController.addThisTodo)
 router.get("/me", auth, userController.getUserDetails);
 router.get("/gettodos/:currentuser", userController.getTodos)
 router.put("/removetodo/:currentuser/:todoid", userController.deleteTodo)
-// router.put("/completetodo/:currentuser/:todoid", userController.completeTodo)
 
 module.exports = router;

@@ -12,7 +12,6 @@ export default {
          logoutUser() {
             localStorage.removeItem("jwt");
             this.$router.push("/");
-            console.log("Success")
         },
     }
 }
